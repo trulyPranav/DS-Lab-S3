@@ -82,7 +82,6 @@ struct Node *dequeueRear(struct Node *head){
         preCurrent -> next = NULL;
         free(current);
     }
-
     printf("\nSuccessfully deleted from Rear");
     return head;
 }
@@ -96,7 +95,7 @@ struct Node *dequeuePosition(struct Node *head, int position){
         struct Node *newHead = head;
         newHead = head -> next;
         free(head);
-        printf("Element at Position %d Deleted!", position);
+        printf("\nElement at Position %d Deleted!", position);
         return newHead;
     } else{
         struct Node *current = head;
@@ -111,9 +110,8 @@ struct Node *dequeuePosition(struct Node *head, int position){
         }
         preCurrent -> next = current -> next;
         free(current);
-        printf("Element at Position %d Deleted!", position);
+        printf("\nElement at Position %d Deleted!", position);
         return head;
-
     }
 }
 
@@ -176,6 +174,8 @@ int main(){
                 break;
             case 8:
                 exit(1);
+            default:
+                printf("\nChoose a valid Operation!");
         }
     }
     return 0;

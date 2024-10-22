@@ -31,7 +31,8 @@ struct Node *enqueueRear(struct Node *head, int newData){
     while(current->next != NULL)
         current = current -> next;
     current -> next = newNode;
-    newNode -> prev = current; 
+    newNode -> prev = current;
+    return head; 
 }
 
 struct Node *enqueuePosition(struct Node *head, int position, int newData){
@@ -58,6 +59,83 @@ struct Node *enqueuePosition(struct Node *head, int position, int newData){
     if(newNode -> next != NULL)
         newNode -> next -> prev = newNode;
     return head;
+}
+
+struct Node *dequeueFront(struct Node *head){
+    if(head == NULL){
+        printf("\nNothihg to Delete!");
+        return head;
+    }
+    struct Node *newHead = head -> next;
+    if(newHead != NULL)
+        newHead -> prev = NULL;
+    free(head);
+    printf("\nSuccessfully deleted from Front");
+    return newHead;
+}
+
+struct Node *dequeueRear(struct Node *head){
+    if(head == NULL){
+        printf("\nNothing to Delete!");
+        return head;
+    }
+    struct Node *current = head;
+    while(current -> next != NULL)
+        current = current -> next;
+    if(current -> prev != NULL)
+        current -> prev -> next = NULL;
+    else{
+        // free(head);
+        head = NULL;
+    }
+    free(current);
+    printf("\nSuccessfully deleted from Rear");
+    return head;
+
+}
+
+struct Node *dequeuePosition(struct Node *head, int position){
+    if(head == NULL){
+        printf("\nNothing to Delete!");
+        return head;
+    }
+    if(position == 1){
+        struct Node *newHead = head -> next;
+        if(newHead != NULL)
+            newHead -> prev = NULL;
+        free(head);
+        printf("\nElement at Position %d Deleted!", position);
+        return newHead;
+    }
+    struct Node *current = head;
+    for(int i=1; i<position && current != NULL; i++)
+        current = current -> next;
+    if(current == NULL){
+        printf("\nInvalid Position!");
+        free(current);
+        return head;
+    }
+    // Assigning Logic:
+    current -> prev -> next = current -> next;
+    if(current->next != NULL)
+        current -> next -> prev = current -> prev;
+    free(current);
+    printf("\nElement at Position %d Deleted!", position);
+    return head;
+}
+
+void displayLinkedList(){
+    if(head == NULL)
+        printf("\nList Empty!");
+    else {
+        struct Node *current = head;
+        printf("\nCurrent Linked List is: NULL -> ");
+        while(current != NULL){
+            printf(" %d -> ", current -> data);
+            current = current -> next;
+        }
+        printf("NULL");
+    }
 }
 
 int main(){
@@ -105,6 +183,8 @@ int main(){
                 break;
             case 8:
                 exit(1);
+            default:
+                printf("\nChoose a valid Operation!");
         }
     }
 }
