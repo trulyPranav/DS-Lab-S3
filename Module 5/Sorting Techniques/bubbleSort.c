@@ -21,9 +21,10 @@ int main(){
             }
         }
     }
-
     // Printing the Sorted Array:
     printf("\nSorted Array is: ");
     for(int i=0; i<n; i++)
         printf("%d ", arr[i]);
+
+    return 0;
 }
