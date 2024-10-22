@@ -177,7 +177,6 @@ int main(){
             case 8:
                 exit(1);
         }
-
     }
     return 0;
 }
