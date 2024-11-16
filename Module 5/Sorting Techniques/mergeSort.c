@@ -3,15 +3,15 @@
 #include <stdio.h>
 #define MAX 100
 
-void merge(int arr[], int l, int m, int r){
-    int n1 = m - l + 1;
-    int n2 = r-m;
+void merge(int arr[], int left, int mid, int right){
+    int n1 = mid - left + 1;
+    int n2 = right-mid;
     int L[n1], R[n2];
     for(int i=0; i<n1; i++)
-        L[i] = arr[l+i];
+        L[i] = arr[left+i];
     for(int i=0; i<n2; i++)
-        R[i] = arr[m+1+i];
-    int i = 0, j=0, k=l;
+        R[i] = arr[mid+1+i];
+    int i = 0, j=0, k=left;
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
@@ -36,12 +36,12 @@ void merge(int arr[], int l, int m, int r){
 
 void mergeSort(int arr[], int left, int right){
     if(left < right){
-        int m = (left+right)/2;
-        mergeSort(arr, left, m);
-        mergeSort(arr, m+1, right);
+        int mid = (left+right)/2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid+1, right);
 
         //Merging:
-        merge(arr, left, m, right);
+        merge(arr, left, mid, right);
     }
 }
 
