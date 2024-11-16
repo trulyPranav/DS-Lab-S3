@@ -29,7 +29,7 @@ void enqueue(int input){
     }
     else{
         rear++;
-        queue[rear] == input;
+        queue[rear] = input;
         printf("\nElement inserted successfully!");        
     }
 }
@@ -51,7 +51,7 @@ void display(){
 }
 
 int main(){
-        printf("\nWelcome to Basic Queue! The queue is currently empty. Do any of the operations below to get started:\n");
+    printf("\nWelcome to Basic Queue! The queue is currently empty. Do any of the operations below to get started:\n");
     while(1){
         printf("\n\n1)Insert an Element into the Queue.\n2)Delete an Element from the Queue.\n3)Peek latest Element.\n4)Display the Queue.\n5)Exit the program.");
         printf("\nEnter the operation to perform: ");  
