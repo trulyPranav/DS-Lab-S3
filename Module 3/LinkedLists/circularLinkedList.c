@@ -107,7 +107,28 @@ struct Node *dequeueRear(struct Node *head){
     }
 }
 
-struct Node *dequeuePosition(){}
+struct Node *dequeuePosition(struct Node *head, int position){
+    if(head == NULL){
+        printf("\nList Empty!\n");
+        return head;
+    }
+    if(position == 1)
+        return dequeueFront(head);
+    struct Node *current = head;
+    struct Node *preCurrent = current;
+    for(int i=1; i<position && current != NULL; i++){
+        preCurrent = current;
+        current = current -> next;
+    }
+    if(current == NULL){
+        printf("\nInvalid Position\n");
+        return head;
+    }
+    preCurrent -> next = current -> next;
+    free(current);
+    printf("\nElement at Position %d Deleted!", position);
+    return head;
+}
 
 struct Node *displayLinkedList(struct Node *head){
     if(head == NULL)
