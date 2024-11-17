@@ -41,25 +41,25 @@ struct Node *enqueueRear(struct Node *head, int newData){
     return head;
 }
 
-struct Node *enqueuePosition(struct Node *head, int position, int newData){
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode -> data = newData;
-    if(position == 1){
-        return enqueueFront(head,newData);
-    } else {
-        struct Node *current = head;
-        for(int i=1; i<position-1 && current!=head; i++)
-            current = current -> next;
-        if(current == head){
-            printf("\nINVALID POSITION\n");
-            free(newNode);
-            return head;
-        }
-        newNode -> next = current -> next;
-        current -> next = newNode;
-        return head;
-    }
-}
+// struct Node *enqueuePosition(struct Node *head, int position, int newData){
+//     struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+//     newNode -> data = newData;
+//     if(position == 1){
+//         return enqueueFront(head,newData);
+//     } else {
+//         struct Node *current = head;
+//         for(int i=1; i<position-1 && current!=head; i++)
+//             current = current -> next;
+//         if(current == head){
+//             printf("\nINVALID POSITION\n");
+//             free(newNode);
+//             return head;
+//         }
+//         newNode -> next = current -> next;
+//         current -> next = newNode;
+//         return head;
+//     }
+// }
 
 struct Node *dequeueFront(struct Node *head){
     if(head == NULL){
@@ -107,32 +107,31 @@ struct Node *dequeueRear(struct Node *head){
     }
 }
 
-struct Node *dequeuePosition(struct Node *head, int position){
-    if(head == NULL){
-        printf("\nList Empty!\n");
-        return head;
-    }
-    if(position == 1)
-        return dequeueFront(head);
-    struct Node *current = head;
-    struct Node *preCurrent = current;
-    int count = 1;
-    while(current!=head && count < position){
-        preCurrent = current;
-        current = current -> next;
-        count++;
-    }
-    if(current == head || count != position){
-        printf("\nInvalid Position\n");
-        return head;
-    }
-    preCurrent -> next = current -> next;
-    if(current -> next == head)
-        head = preCurrent -> next;
-    free(current);
-    printf("\nElement at Position %d Deleted!", position);
-    return head;
-}
+// struct Node *dequeuePosition(struct Node *head, int position) {
+//     if (head == NULL) {
+//         printf("\nList is Empty!\n");
+//         return head;
+//     }
+//     if (position == 1) {
+//         return dequeueFront(head);
+//     }
+//     struct Node *current = head;
+//     struct Node *preCurrent = NULL;
+//     int count = 1;
+//     for(int i=0; i<position && current->next!= head; i++){
+//         preCurrent = current;
+//         current = current -> next;
+//     }
+//     if (current -> next == head) {
+//         printf("\nInvalid Position\n");
+//         return head;
+//     }
+//     preCurrent->next = current->next;
+//     free(current);
+//     printf("\nElement at Position %d Deleted!\n", position);
+//     return head;
+// }
+
 
 struct Node *displayLinkedList(struct Node *head){
     if(head == NULL)
