@@ -66,7 +66,28 @@ struct Node *dequeueFront(struct Node *head){
     }
 }
 
-struct Node *dequeueRear(){}
+struct Node *dequeueRear(struct Node *head){
+    if(head ==  NULL){
+        printf("\nList Empty!\n");
+        return head;
+    } else {
+        struct Node *last = head;
+        struct Node *preLast = NULL;
+        while(last -> next != head){
+            preLast = last;
+            last = last -> next;
+        }
+        if(preLast == NULL){
+            free(head);
+            head = NULL;
+        } else {
+            preLast -> next = head;
+            free(last);
+        }
+    printf("\nSuccessfully deleted from Rear\n");
+    return head;
+    }
+}
 
 struct Node *dequeuePosition(){}
 
