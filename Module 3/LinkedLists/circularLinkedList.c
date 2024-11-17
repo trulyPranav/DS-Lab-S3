@@ -48,9 +48,9 @@ struct Node *enqueuePosition(struct Node *head, int position, int newData){
         return enqueueFront(head,newData);
     } else {
         struct Node *current = head;
-        for(int i=1; i<position-1 && current!=NULL; i++)
+        for(int i=1; i<position-1 && current!=head; i++)
             current = current -> next;
-        if(current == NULL){
+        if(current == head){
             printf("\nINVALID POSITION\n");
             free(newNode);
             return head;
@@ -116,15 +116,19 @@ struct Node *dequeuePosition(struct Node *head, int position){
         return dequeueFront(head);
     struct Node *current = head;
     struct Node *preCurrent = current;
-    for(int i=1; i<position && current != NULL; i++){
+    int count = 1;
+    while(current!=head && count < position){
         preCurrent = current;
         current = current -> next;
+        count++;
     }
-    if(current == NULL){
+    if(current == head || count != position){
         printf("\nInvalid Position\n");
         return head;
     }
     preCurrent -> next = current -> next;
+    if(current -> next == head)
+        head = preCurrent -> next;
     free(current);
     printf("\nElement at Position %d Deleted!", position);
     return head;
@@ -163,27 +167,27 @@ int main(){
                 scanf("%d", &revElm);
                 head = enqueueRear(head, revElm);
                 break;
-            // case 3:
-            //     printf("\nEnter element to insert: ");
-            //     int posElm;
-            //     scanf("%d", &posElm);
-            //     printf("\nEnter position to insert: ");
-            //     int pos;
-            //     scanf("%d",&pos);
-            //     head = enqueuePosition(head,pos,posElm);
-            //     break;
+            case 3:
+                printf("\nEnter element to insert: ");
+                int posElm;
+                scanf("%d", &posElm);
+                printf("\nEnter position to insert: ");
+                int pos;
+                scanf("%d",&pos);
+                head = enqueuePosition(head,pos,posElm);
+                break;
             case 4:
                 head = dequeueFront(head);
                 break;
-            // case 5:
-            //     head = dequeueRear(head);
-            //     break;
-            // case 6:
-            //     int delPos;
-            //     printf("\nEnter list position to delete: ");
-            //     scanf("%d",&delPos);
-            //     head = dequeuePosition(head,delPos);
-            //     break;
+            case 5:
+                head = dequeueRear(head);
+                break;
+            case 6:
+                int delPos;
+                printf("\nEnter list position to delete: ");
+                scanf("%d",&delPos);
+                head = dequeuePosition(head,delPos);
+                break;
             case 7:
                 displayLinkedList(head);
                 break;
