@@ -49,6 +49,7 @@ struct Node *enqueuePosition(struct Node *head, int position, int newData){
     for(int i=1; i<position-1 && current !=NULL; i++)
         current = current -> next;
     if(current == NULL){
+        printf("\nINVALID POSITION\n");
         free(current);
         return head;
     }
@@ -63,7 +64,7 @@ struct Node *enqueuePosition(struct Node *head, int position, int newData){
 
 struct Node *dequeueFront(struct Node *head){
     if(head == NULL){
-        printf("\nNothihg to Delete!");
+        printf("\nNothing to Delete!");
         return head;
     }
     struct Node *newHead = head -> next;
