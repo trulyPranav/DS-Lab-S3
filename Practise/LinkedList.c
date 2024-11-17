@@ -17,25 +17,23 @@ struct Node *enqueueFront(struct Node *head, int newData){
 }
 
 struct Node *enqueueRear(struct Node *head, int newData){
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode -> data = newData;
     newNode -> next = NULL;
-
     if(head == NULL)
         head = newNode;
     else {
         struct Node *current = head;
         while(current->next!=NULL)
             current = current->next;
-        current->next = newNode;
+        current -> next = newNode;
     }
     return head;
 }
 
-struct Node *enqueuePosition(struct Node *head, int pos,int newData){
+struct Node *enqueuePosition(struct Node *head, int pos, int newData){
     struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode -> data = newData;
-    newNode -> next = NULL;
     if(pos == 1){
         newNode -> next = head;
         head = newNode;
@@ -45,7 +43,7 @@ struct Node *enqueuePosition(struct Node *head, int pos,int newData){
     for(int i = 1; i<pos-1 && current!=NULL; i++)
         current = current->next;
     if(current == NULL){
-        printf("\nInvalid Position\n");
+        printf("\nINVALID POSITION\n");
         free(newNode);
         return head;
     }
@@ -56,52 +54,52 @@ struct Node *enqueuePosition(struct Node *head, int pos,int newData){
 
 struct Node *dequeueFront(struct Node *head){
     if(head == NULL){
-        printf("\nNothing to Delete!");
+        printf("List is Empty!");
         return head;
     }
     struct Node *newHead = head -> next;
     free(head);
-    printf("\nSuccessfully deleted from Front");
+    printf("\nSuccessfully deleted from Front\n");
     return newHead;
 }
 
 struct Node *dequeueRear(struct Node *head){
     if(head == NULL){
-        printf("\nNothing to Delete!");
+        printf("List is Empty!");
         return head;
     }
     struct Node *current = head;
     struct Node *preCurrent = NULL;
-    while(current -> next != NULL){
+    while(current->next != NULL){
         preCurrent = current;
         current = current -> next;
     }
     if(preCurrent == NULL){
         free(head);
         head = NULL;
-    } else{
+    } else {
         preCurrent -> next = NULL;
         free(current);
     }
-    printf("\nSuccessfully deleted from Rear");
+    printf("\nSuccessfully deleted from Rear\n");
     return head;
 }
 
-struct Node *dequeuePosition(struct Node *head, int position){
+struct Node *dequeuePosition(struct Node *head, int pos){
     if(head == NULL){
-        printf("Nothing to Delete!");
-        return head;
+        printf("List is Empty!");
+        return head;        
     }
-    if(position == 1){
+    if(pos == 1){
         struct Node *newHead = head;
         newHead = head -> next;
         free(head);
         printf("\nElement at Position %d Deleted!", position);
-        return newHead;
-    } else{
+        return newHead;        
+    } else {
         struct Node *current = head;
         struct Node *preCurrent = current;
-        for(int i=1; i<position && current!=NULL; i++){
+        for(int i=1; i<pos && current!=NULL; i++){
             preCurrent = current;
             current = current -> next;
         }
@@ -118,15 +116,15 @@ struct Node *dequeuePosition(struct Node *head, int position){
 
 void displayLinkedList(struct Node *head){
     if(head == NULL)
-        printf("\nList Empty!!");
-    else{
+        printf("List Empty!");
+    else {
+        printf("\nCurrent List is: ");
         struct Node *current = head;
-        printf("\nCurrent Linked List is: ");
         while(current != NULL){
             printf("%d -> ", current->data);
-            current = current -> next;
+            current = current->next;
         }
-        printf("NULL");
+        printf("NULL\n");
     }
 }
 
@@ -170,7 +168,7 @@ int main(){
                 scanf("%d",&delPos);
                 head = dequeuePosition(head,delPos);
                 break;
-            case 7:
+            case 7: 
                 displayLinkedList(head);
                 break;
             case 8:
