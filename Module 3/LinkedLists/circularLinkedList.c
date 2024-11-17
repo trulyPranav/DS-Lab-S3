@@ -41,7 +41,25 @@ struct Node *enqueueRear(struct Node *head, int newData){
     return head;
 }
 
-struct Node *enqueuePosition(){}
+struct Node *enqueuePosition(struct Node *head, int position, int newData){
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode -> data = newData;
+    if(position == 1){
+        return enqueueFront(head,newData);
+    } else {
+        struct Node *current = head;
+        for(int i=1; i<position-1 && current!=NULL; i++)
+            current = current -> next;
+        if(current == NULL){
+            printf("\nINVALID POSITION\n");
+            free(newNode);
+            return head;
+        }
+        newNode -> next = current -> next;
+        current -> next = newNode;
+        return head;
+    }
+}
 
 struct Node *dequeueFront(struct Node *head){
     if(head == NULL){
